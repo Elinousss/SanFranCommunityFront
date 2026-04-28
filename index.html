@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SanFran Community - Portal Provisional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+    <header class="site-header" role="banner">
+      <div class="header-content">
+        <p class="eyebrow">Provisional</p>
+        <h1>SanFran Community</h1>
+        <p class="subtitle">Portal de consulta y registro conectado al backend</p>
+      </div>
+    </header>
+
+    <main id="main-content" class="layout" tabindex="-1">
+      <section class="panel" aria-labelledby="backend-config-title">
+        <h2 id="backend-config-title">Conexión del backend</h2>
+        <form id="config-form" novalidate>
+          <div class="field-group">
+            <label for="apiBaseUrl">URL base API</label>
+            <input
+              id="apiBaseUrl"
+              name="apiBaseUrl"
+              type="url"
+              inputmode="url"
+              autocomplete="url"
+              required
+              aria-describedby="apiBaseUrlHelp"
+            />
+            <p id="apiBaseUrlHelp" class="field-help">Ejemplo: http://localhost:8080/api/v1</p>
+          </div>
+          <button type="submit" class="btn-primary">Guardar URL</button>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="users-title">
+        <div class="panel-heading">
+          <h2 id="users-title">Usuarios</h2>
+          <button id="refresh-users" type="button" class="btn-secondary">Actualizar lista</button>
+        </div>
+
+        <form id="user-form" novalidate aria-labelledby="create-user-title">
+          <h3 id="create-user-title">Crear usuario</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="names">Nombres</label>
+              <input id="names" name="names" type="text" autocomplete="name" required />
+            </div>
+            <div class="field-group">
+              <label for="idDocument">Documento</label>
+              <input id="idDocument" name="idDocument" type="text" required />
+            </div>
+            <div class="field-group">
+              <label for="email">Correo electrónico</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field-group">
+              <label for="role">Rol</label>
+              <input id="role" name="role" type="text" value="RESIDENT" required />
+            </div>
+            <div class="field-group">
+              <label for="subRole">Sub-rol</label>
+              <input id="subRole" name="subRole" type="text" value="TENANT" required />
+            </div>
+            <div class="field-group">
+              <label for="password">Contraseña</label>
+              <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" required />
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">Crear usuario</button>
+        </form>
+
+        <form id="user-query-form" novalidate aria-labelledby="query-user-title" class="query-form">
+          <h3 id="query-user-title">Busqueda de usuarios por query param</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="userQueryType">Criterio</label>
+              <select id="userQueryType" name="userQueryType">
+                <option value="all">Todos</option>
+                <option value="id">ID</option>
+                <option value="names">Nombres</option>
+              </select>
+            </div>
+            <div class="field-group field-group-full">
+              <label for="userQueryValue">Valor</label>
+              <input id="userQueryValue" name="userQueryValue" type="text" />
+            </div>
+          </div>
+          <button type="submit" class="btn-secondary">Buscar usuarios</button>
+        </form>
+
+        <form id="user-delete-form" novalidate aria-labelledby="delete-user-title" class="query-form">
+          <h3 id="delete-user-title">Eliminar usuario por query param</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="userDeleteType">Eliminar por</label>
+              <select id="userDeleteType" name="userDeleteType">
+                <option value="id">ID</option>
+                <option value="names">Nombres</option>
+              </select>
+            </div>
+            <div class="field-group field-group-full">
+              <label for="userDeleteValue">Valor</label>
+              <input id="userDeleteValue" name="userDeleteValue" type="text" required />
+            </div>
+          </div>
+          <button type="submit" class="btn-danger">Eliminar usuario</button>
+        </form>
+
+        <div class="table-wrapper" role="region" aria-labelledby="users-table-title" tabindex="0">
+          <h3 id="users-table-title">Listado de usuarios</h3>
+          <table>
+            <caption class="sr-only">Tabla con los usuarios registrados en el sistema</caption>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Documento</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Sub-rol</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody">
+              <tr>
+                <td colspan="6">Sin datos cargados.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="facilities-title">
+        <div class="panel-heading">
+          <h2 id="facilities-title">Facilities</h2>
+          <button id="refresh-facilities" type="button" class="btn-secondary">Actualizar lista</button>
+        </div>
+
+        <form id="facility-form" novalidate aria-labelledby="create-facility-title">
+          <h3 id="create-facility-title">Crear facility</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="facilityName">Nombre</label>
+              <input id="facilityName" name="facilityName" type="text" required />
+            </div>
+            <div class="field-group">
+              <label for="facilityCapacity">Capacidad</label>
+              <input id="facilityCapacity" name="facilityCapacity" type="number" min="1" required />
+            </div>
+            <div class="field-group field-group-full">
+              <label for="facilityDescription">Descripcion</label>
+              <input id="facilityDescription" name="facilityDescription" type="text" required />
+            </div>
+            <div class="field-group field-group-full">
+              <label for="facilityImageUrl">URL imagen</label>
+              <input id="facilityImageUrl" name="facilityImageUrl" type="url" required />
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">Crear facility</button>
+        </form>
+
+        <form id="facility-query-form" novalidate aria-labelledby="query-facility-title" class="query-form">
+          <h3 id="query-facility-title">Busqueda de facilities por query param</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="facilityQueryType">Criterio</label>
+              <select id="facilityQueryType" name="facilityQueryType">
+                <option value="all">Todos</option>
+                <option value="id">ID</option>
+                <option value="name">Nombre</option>
+              </select>
+            </div>
+            <div class="field-group field-group-full">
+              <label for="facilityQueryValue">Valor</label>
+              <input id="facilityQueryValue" name="facilityQueryValue" type="text" />
+            </div>
+          </div>
+          <button type="submit" class="btn-secondary">Buscar facilities</button>
+        </form>
+
+        <form id="facility-delete-form" novalidate aria-labelledby="delete-facility-title" class="query-form">
+          <h3 id="delete-facility-title">Eliminar facility por query param</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="facilityDeleteType">Eliminar por</label>
+              <select id="facilityDeleteType" name="facilityDeleteType">
+                <option value="id">ID</option>
+                <option value="name">Nombre</option>
+              </select>
+            </div>
+            <div class="field-group field-group-full">
+              <label for="facilityDeleteValue">Valor</label>
+              <input id="facilityDeleteValue" name="facilityDeleteValue" type="text" required />
+            </div>
+          </div>
+          <button type="submit" class="btn-danger">Eliminar facility</button>
+        </form>
+
+        <div class="table-wrapper" role="region" aria-labelledby="facilities-table-title" tabindex="0">
+          <h3 id="facilities-table-title">Listado de facilities</h3>
+          <table>
+            <caption class="sr-only">Tabla con las facilities registradas en el sistema</caption>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Capacidad</th>
+              </tr>
+            </thead>
+            <tbody id="facilities-tbody">
+              <tr>
+                <td colspan="4">Sin datos cargados.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="reservations-title">
+        <div class="panel-heading">
+          <h2 id="reservations-title">Reservations</h2>
+          <button id="refresh-reservations" type="button" class="btn-secondary">Actualizar lista</button>
+        </div>
+
+        <form id="reservation-form" novalidate aria-labelledby="create-reservation-title">
+          <h3 id="create-reservation-title">Crear reservation</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="reservationUserId">User ID</label>
+              <input id="reservationUserId" name="reservationUserId" type="text" required />
+            </div>
+            <div class="field-group">
+              <label for="reservationFacilityId">Facility ID</label>
+              <input id="reservationFacilityId" name="reservationFacilityId" type="text" required />
+            </div>
+            <div class="field-group">
+              <label for="reservationDate">Fecha</label>
+              <input id="reservationDate" name="reservationDate" type="date" required />
+            </div>
+            <div class="field-group">
+              <label for="reservationStartTime">Hora inicio</label>
+              <input id="reservationStartTime" name="reservationStartTime" type="time" step="1" required />
+            </div>
+            <div class="field-group">
+              <label for="reservationEndTime">Hora fin</label>
+              <input id="reservationEndTime" name="reservationEndTime" type="time" step="1" required />
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">Crear reservation</button>
+        </form>
+
+        <form id="reservation-query-form" novalidate aria-labelledby="query-reservation-title" class="query-form">
+          <h3 id="query-reservation-title">Busqueda de reservations por query param</h3>
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="reservationQueryType">Criterio</label>
+              <select id="reservationQueryType" name="reservationQueryType">
+                <option value="all">Todos</option>
+                <option value="id">ID</option>
+                <option value="date">Fecha</option>
+              </select>
+            </div>
+            <div class="field-group field-group-full">
+              <label for="reservationQueryValue">Valor</label>
+              <input id="reservationQueryValue" name="reservationQueryValue" type="text" placeholder="UUID o 2026-05-10" />
+            </div>
+          </div>
+          <button type="submit" class="btn-secondary">Buscar reservations</button>
+        </form>
+
+        <form id="reservation-delete-form" novalidate aria-labelledby="delete-reservation-title" class="query-form">
+          <h3 id="delete-reservation-title">Eliminar reservation por query param</h3>
+          <div class="form-grid">
+            <div class="field-group field-group-full">
+              <label for="reservationDeleteValue">ID de reservation</label>
+              <input id="reservationDeleteValue" name="reservationDeleteValue" type="text" required />
+            </div>
+          </div>
+          <button type="submit" class="btn-danger">Eliminar reservation</button>
+        </form>
+
+        <div class="table-wrapper" role="region" aria-labelledby="reservations-table-title" tabindex="0">
+          <h3 id="reservations-table-title">Listado de reservations</h3>
+          <table>
+            <caption class="sr-only">Tabla con reservations registradas en el sistema</caption>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Facility ID</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Inicio</th>
+                <th scope="col">Fin</th>
+              </tr>
+            </thead>
+            <tbody id="reservations-tbody">
+              <tr>
+                <td colspan="6">Sin datos cargados.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="status-title">
+        <h2 id="status-title">Estado de operaciones</h2>
+        <div id="status" class="status" role="status" aria-live="polite" aria-atomic="true">
+          Esperando acción del usuario.
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
