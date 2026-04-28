@@ -422,6 +422,10 @@ async function buildRequestError(response, fallbackMessage) {
 }
 
 function getErrorMessage(error) {
+  if (error instanceof TypeError) {
+    return "Failed to fetch: verifica URL base, CORS y que el frontend se abra desde http://localhost (no file://).";
+  }
+
   if (error instanceof Error) {
     return error.message;
   }
