@@ -1,0 +1,497 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.home-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 20px 0;
+  box-shadow: var(--shadow);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.header-left i {
+  font-size: 32px;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.user-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.admin-badge {
+  color: #fbbf24;
+  margin-left: 6px;
+  font-size: 0.95em;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: white;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-large {
+  padding: 14px 32px;
+  font-size: 16px;
+}
+
+.home-main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 60px;
+  background: var(--surface);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-content h2 {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 15px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.hero-content p {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.welcome-msg {
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 15px !important;
+}
+
+.hero-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h2 {
+    font-size: 28px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.facilities-section {
+  margin-bottom: 60px;
+}
+
+.facilities-section h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 30px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.facility-card {
+  background: var(--surface);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.facility-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+}
+
+.facility-banner {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: none;
+  text-align: center;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.facility-info {
+  padding: 20px;
+}
+
+.facility-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+
+.facility-info .description {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 15px;
+  line-height: 1.5;
+}
+
+.reservation-message {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--primary);
+}
+
+.facility-details {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.capacity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.stat-card {
+  background: var(--surface);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+}
+
+.stat-card i {
+  font-size: 40px;
+  color: var(--primary);
+  margin-bottom: 15px;
+  display: block;
+}
+
+.stat-card h3 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 5px;
+}
+
+.stat-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 60px 40px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.cta-section h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 15px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.cta-section p {
+  font-size: 18px;
+  margin: 0 0 30px;
+  opacity: 0.9;
+}
+
+.cta-section .btn {
+  background: white;
+  color: var(--primary);
+}
+
+.cta-section .btn:hover {
+  background: var(--bg);
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.empty-state i {
+  font-size: 48px;
+  margin-bottom: 15px;
+  opacity: 0.5;
+}
+
+.home-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: auto;
+}
+
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Reservation form styles */
+.reservation-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+}
+
+.reservation-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.reservation-form input[type="date"],
+.reservation-form input[type="time"] {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+}
+
+.react-datepicker-input {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+}
+
+.reservation-form .btn {
+  padding: 8px 12px;
+}
+
+@media (max-width: 480px) {
+  .reservation-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Polished card form look */
+.facility-info .reservation-form {
+  background: rgba(15,23,42,0.03);
+  border: 1px solid rgba(0,0,0,0.04);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.reservation-form label {
+  min-width: 120px;
+}
+
+.reservation-form .btn {
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+}
+
+.reservation-form .btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.reservation-message {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  .home-main {
+    padding: 20px 16px;
+  }
+
+  .hero {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .hero-content h2 {
+    font-size: 24px;
+  }
+
+  .facilities-section h2 {
+    font-size: 24px;
+  }
+
+  .cta-section {
+    padding: 40px 20px;
+  }
+
+  .cta-section h2 {
+    font-size: 24px;
+  }
+}
