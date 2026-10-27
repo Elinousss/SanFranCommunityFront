@@ -103,7 +103,7 @@ El acceso a `/admin` está protegido con `ProtectedRoute` y solo se permite a us
 
 ## 🧩 Arquitectura
 
-La interfaz sigue la organización de `paseoappfront` con `componentes/`, `paginas/`, `assets/`, `main.jsx`, `App.jsx` y `estilos.css`. Las capas adicionales conservan responsabilidades separadas:
+La interfaz sigue la organización con `componentes/`, `paginas/`, `assets/`, `main.jsx`, `App.jsx` y `estilos.css`. Las capas adicionales conservan responsabilidades separadas:
 
 - `core`: configuración, constantes y enums
 - `domain`: entidades e interfaces del negocio
