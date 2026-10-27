@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../presentation/hooks/useAuth';
 import { useApi } from '../presentation/hooks/useApi';
 import { ServiceLocator } from '../infrastructure/service-locator';
-import Button from '../components/Button';
-import Spinner from '../components/Spinner';
+import Button from '../componentes/Button';
+import Spinner from '../componentes/Spinner';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PiscinaImage from '../assets/images/Piscina.jpg';
@@ -207,20 +207,37 @@ const Home = () => {
 
       <main className="home-main">
         <section className="hero">
-          <div className="hero-content">
-            <h2>Bienvenido a SanFran Community</h2>
-            <p>Descubre nuestras increíbles instalaciones y servicios</p>
-            {user && <p className="welcome-msg">¡Hola, {user.names}!</p>}
-          </div>
           <img
-            src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800&h=400&fit=crop"
-            alt="Community Building"
+            src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=2200&q=85"
+            alt="Residencia y espacios comunes de SanFran Community"
             className="hero-image"
           />
+          <div className="hero-shade" aria-hidden="true" />
+          <div className="hero-content">
+            <p className="hero-eyebrow">Vivir mejor, juntos</p>
+            <h2>Tu comunidad.<br />Tu lugar.</h2>
+            <p>Encuentra espacios para compartir, celebrar y disfrutar cada día.</p>
+            {user && <p className="welcome-msg">¡Hola, {user.names}!</p>}
+            <div className="hero-actions">
+              <a className="hero-cta" href="#facilities">
+                Explorar espacios <i className="fas fa-arrow-down" aria-hidden="true"></i>
+              </a>
+              {!user && (
+                <Link to="/register" className="hero-secondary-link">Únete a la comunidad</Link>
+              )}
+            </div>
+          </div>
+          <div className="hero-index" aria-hidden="true">01 <span>/</span> 03</div>
         </section>
 
-        <section className="facilities-section">
-          <h2>Nuestras Instalaciones</h2>
+        <section className="facilities-section" id="facilities">
+          <div className="section-heading">
+            <div>
+              <p className="section-kicker">Espacios para disfrutar</p>
+              <h2>Nuestras instalaciones</h2>
+            </div>
+            <p className="section-intro">Un lugar para cada momento, a pocos pasos de casa.</p>
+          </div>
           {error && <div className="alert alert-error">{error}</div>}
 
           {loading ? (
@@ -251,9 +268,20 @@ const Home = () => {
 
                 return (
                   <div key={facility.id} className="facility-card">
-                    <div className="facility-banner" style={bannerStyle} />
+                    <div className="facility-banner" style={bannerStyle}>
+                      <span className="facility-number">{String(facilities.indexOf(facility) + 1).padStart(2, '0')}</span>
+                      <h3 className="facility-banner-title">{facility.name}</h3>
+                      <button
+                        type="button"
+                        className="facility-image-arrow"
+                        aria-label={`Reservar ${facility.name}`}
+                        title={`Reservar ${facility.name}`}
+                        onClick={() => openReservationForm(facility.id)}
+                      >
+                        <i className="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                      </button>
+                    </div>
                     <div className="facility-info">
-                    <h3>{facility.name}</h3>
                     <p className="description">{facility.description}</p>
                     <div className="facility-details">
                       <span className="capacity">

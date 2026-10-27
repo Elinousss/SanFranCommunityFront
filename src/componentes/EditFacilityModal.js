@@ -5,6 +5,8 @@ const EditFacilityModal = ({ visible, title = 'Editar Facility', initialData, on
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [capacity, setCapacity] = useState(1);
+  const [requiresPayment, setRequiresPayment] = useState(false);
+  const [price, setPrice] = useState(0);
   const [imageUrl, setImageUrl] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
@@ -20,6 +22,8 @@ const EditFacilityModal = ({ visible, title = 'Editar Facility', initialData, on
       setName(initialData.name || '');
       setDescription(initialData.description || '');
       setCapacity(initialData.capacity || 1);
+      setRequiresPayment(Boolean(initialData.requiresPayment));
+      setPrice(initialData.price || 0);
       setImageUrl(initialData.imageUrl || '');
       setPreviewUrl(initialData.imageUrl || '');
       setSelectedFile(null);
@@ -31,6 +35,8 @@ const EditFacilityModal = ({ visible, title = 'Editar Facility', initialData, on
       setName('');
       setDescription('');
       setCapacity(1);
+      setRequiresPayment(false);
+      setPrice(0);
       setImageUrl('');
       setSelectedFile(null);
       revokePreview(previewUrl);
@@ -66,7 +72,14 @@ const EditFacilityModal = ({ visible, title = 'Editar Facility', initialData, on
     }
 
     const finishSave = (url) => {
-      onSave({ name, description, capacity: cap, imageUrl: url });
+      onSave({
+        name,
+        description,
+        capacity: cap,
+        requiresPayment,
+        price: requiresPayment ? Number(price) : 0,
+        imageUrl: url,
+      });
     };
 
     if (selectedFile) {
@@ -95,6 +108,27 @@ const EditFacilityModal = ({ visible, title = 'Editar Facility', initialData, on
         <label>Capacidad</label>
         <input type="number" value={capacity} onChange={(e) => setCapacity(e.target.value)} />
       </div>
+      <div className="form-row">
+        <label>
+          <input
+            type="checkbox"
+            checked={requiresPayment}
+            onChange={(e) => setRequiresPayment(e.target.checked)}
+          />{' '}
+          Requiere pago
+        </label>
+      </div>
+      {requiresPayment && (
+        <div className="form-row">
+          <label>Precio</label>
+          <input
+            type="number"
+            min="0"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+      )}
       <div className="form-row">
         <label>Imagen de referencia</label>
         <input type="file" accept="image/*" onChange={handleFileChange} />

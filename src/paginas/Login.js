@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../presentation/hooks/useAuth';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import Button from '../componentes/Button';
+import Input from '../componentes/Input';
 import '../styles/auth.css';
 
 const Login = () => {
@@ -30,6 +30,14 @@ const Login = () => {
 
   return (
     <div className="auth-container">
+      <aside className="auth-scene" aria-label="SanFran Community, un lugar para sentirte en casa">
+        <span className="auth-scene-kicker">SanFran Community / 2026</span>
+        <div>
+          <p>Vivir mejor, juntos</p>
+          <h2>Un lugar para sentirte en casa.</h2>
+        </div>
+        <span className="auth-scene-note">Espacios compartidos. Comunidad cercana.</span>
+      </aside>
       <div className="auth-card">
         <div className="auth-header">
           <i className="fas fa-building"></i>
@@ -67,6 +75,12 @@ const Login = () => {
             placeholder="••••••••"
             required
           />
+
+          <div className="auth-reset-link">
+            <Link to="/reset-password" className="link">
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </div>
 
           <Button type="submit" className="btn-primary" disabled={loading}>
             {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}

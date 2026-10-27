@@ -1,9 +1,15 @@
+import axios from 'axios';
 import { API_CONSTANTS } from '../../core/constants/api.constants';
 
 export class ApiClient {
   constructor(baseUrl, timeout) {
     this.baseUrl = baseUrl || API_CONSTANTS.BASE_URL;
     this.timeout = timeout || API_CONSTANTS.TIMEOUT;
+    this.client = axios.create({
+      baseURL: this.baseUrl,
+      timeout: this.timeout,
+      headers: API_CONSTANTS.HEADERS,
+    });
   }
 
   async get(endpoint, options = {}) {
@@ -39,72 +45,50 @@ export class ApiClient {
   }
 
   async request(endpoint, options = {}) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), this.timeout);
-
     try {
-      const url = `${this.baseUrl}${endpoint}`;
       const headers = {
         ...API_CONSTANTS.HEADERS,
         ...(options.headers || {}),
       };
 
-      if (options.body instanceof FormData) {
+      if (typeof FormData !== 'undefined' && options.body instanceof FormData) {
         delete headers['Content-Type'];
       }
 
-      const response = await fetch(url, {
-        ...options,
+      const { body, method = 'GET', ...config } = options;
+      const response = await this.client.request({
+        ...config,
+        url: endpoint,
+        method,
+        data: body,
         headers,
-        signal: controller.signal,
       });
 
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        await this.handleError(response);
-      }
-
-      const text = await response.text();
-      return text ? JSON.parse(text) : {};
+      return response.data ?? {};
     } catch (error) {
-      clearTimeout(timeoutId);
       throw this.handleException(error);
     }
   }
 
-  async handleError(response) {
-    const contentType = response.headers.get('content-type');
-    let errorPayload = {
-      status: response.status,
-      statusText: response.statusText,
-    };
-
-    try {
-      if (contentType?.includes('application/json')) {
-        errorPayload = await response.json();
-        errorPayload = errorPayload?.data || errorPayload;
-      }
-    } catch {
-      // Ignore parse errors
-    }
-
-    const message = errorPayload?.message || errorPayload?.error || `${errorPayload?.status || response.status} ${response.statusText}`;
-    throw new Error(message);
-  }
-
   handleException(error) {
-    if (error instanceof TypeError && error.message === 'Failed to fetch') {
+    if (axios.isAxiosError(error)) {
+      const payload = error.response?.data?.data || error.response?.data;
+      if (error.code === 'ECONNABORTED') {
+        return new Error('La solicitud tardó demasiado. Intenta nuevamente');
+      }
+      if (error.response) {
+        return new Error(
+          payload?.message || payload?.error || `${error.response.status} ${error.response.statusText}`
+        );
+      }
       return new Error('Error de conexión. Verifica tu internet');
-    }
-    if (error instanceof DOMException && error.name === 'AbortError') {
-      return new Error('La solicitud tardó demasiado. Intenta nuevamente');
     }
     return error instanceof Error ? error : new Error('Error desconocido');
   }
 
   setBaseUrl(url) {
     this.baseUrl = url;
+    this.client.defaults.baseURL = url;
   }
 
   getBaseUrl() {

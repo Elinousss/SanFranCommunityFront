@@ -1,5 +1,5 @@
 export const API_CONSTANTS = {
-  BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:8080/api/v1',
+  BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1',
   TIMEOUT: 30000,
   HEADERS: {
     'Content-Type': 'application/json',
@@ -9,7 +9,7 @@ export const API_CONSTANTS = {
 
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/users',
+    LOGIN: '/auth/login',
     REGISTER: '/users',
     LOGOUT: '/auth/logout',
   },

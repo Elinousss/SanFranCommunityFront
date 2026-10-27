@@ -6,7 +6,7 @@ const Modal = ({ visible, title, onClose, children }) => {
 
   return (
     <div className="modal-overlay" onMouseDown={onClose}>
-      <div className="modal" onMouseDown={(e) => e.stopPropagation()}>
+      <div className="app-modal" onMouseDown={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3>{title}</h3>
           <button className="btn btn-small" onClick={onClose}>×</button>

@@ -3,12 +3,12 @@ import { useAuth } from '../presentation/hooks/useAuth';
 import { Link } from 'react-router-dom';
 import { ServiceLocator } from '../infrastructure/service-locator';
 import '../styles/admin.css';
-import EditUserModal from '../components/EditUserModal';
-import EditFacilityModal from '../components/EditFacilityModal';
-import EditReservationModal from '../components/EditReservationModal';
-import AddUserModal from '../components/AddUserModal';
-import AddFacilityModal from '../components/AddFacilityModal';
-import AddReservationModal from '../components/AddReservationModal';
+import EditUserModal from '../componentes/EditUserModal';
+import EditFacilityModal from '../componentes/EditFacilityModal';
+import EditReservationModal from '../componentes/EditReservationModal';
+import AddUserModal from '../componentes/AddUserModal';
+import AddFacilityModal from '../componentes/AddFacilityModal';
+import AddReservationModal from '../componentes/AddReservationModal';
 
 const userService = ServiceLocator.getInstance().userService;
 const facilityService = ServiceLocator.getInstance().facilityService;
@@ -221,7 +221,12 @@ const AdminPanel = () => {
 
       <div className="admin-container">
         <nav className="admin-nav">
+          <div className="admin-nav-intro">
+            <span>Área de trabajo</span>
+            <strong>Administración</strong>
+          </div>
           <button
+            type="button"
             className={`nav-item ${activeTab === 'users' ? 'active' : ''}`}
             onClick={() => setActiveTab('users')}
           >
@@ -229,6 +234,7 @@ const AdminPanel = () => {
             Usuarios
           </button>
           <button
+            type="button"
             className={`nav-item ${activeTab === 'facilities' ? 'active' : ''}`}
             onClick={() => setActiveTab('facilities')}
           >
@@ -236,6 +242,7 @@ const AdminPanel = () => {
             Facilities
           </button>
           <button
+            type="button"
             className={`nav-item ${activeTab === 'reservations' ? 'active' : ''}`}
             onClick={() => setActiveTab('reservations')}
           >

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../presentation/hooks/useAuth';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import Button from '../componentes/Button';
+import Input from '../componentes/Input';
 import '../styles/auth.css';
 
 const Register = () => {
@@ -53,6 +53,14 @@ const Register = () => {
 
   return (
     <div className="auth-container">
+      <aside className="auth-scene" aria-label="SanFran Community, un lugar para sentirte en casa">
+        <span className="auth-scene-kicker">SanFran Community / 2026</span>
+        <div>
+          <p>Vivir mejor, juntos</p>
+          <h2>Un lugar para sentirte en casa.</h2>
+        </div>
+        <span className="auth-scene-note">Espacios compartidos. Comunidad cercana.</span>
+      </aside>
       <div className="auth-card auth-card-large">
         <div className="auth-header">
           <i className="fas fa-user-plus"></i>

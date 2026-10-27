@@ -27,12 +27,12 @@ http://localhost:8080/api/v1
 Para configurar otra URL, crea un archivo `.env` en la raíz con:
 
 ```env
-REACT_APP_API_URL=http://tu-backend:8080/api/v1
+VITE_API_URL=http://tu-backend:8080/api/v1
 ```
 
 ### 3. Ejecutar en desarrollo
 ```bash
-npm start
+npm run dev
 ```
 
 ### 4. Generar build de producción
@@ -45,11 +45,14 @@ npm run build
 ```
 SanFranCommunityFront/
 ├── public/
-│   └── index.html
 ├── src/
+│   ├── assets/
+│   │   └── images/
 │   ├── application/
 │   │   ├── dto/
 │   │   └── services/
+│   ├── componentes/
+│   ├── context/
 │   ├── core/
 │   │   ├── config/
 │   │   ├── constants/
@@ -65,13 +68,13 @@ SanFranCommunityFront/
 │   ├── presentation/
 │   │   ├── context/
 │   │   └── hooks/
-│   ├── components/
-│   ├── pages/
 │   ├── styles/
-│   ├── App.js
-│   ├── index.js
-│   └── index.css
+│   ├── paginas/
+│   ├── App.jsx
+│   ├── estilos.css
+│   └── main.jsx
 ├── package.json
+├── vite.config.js
 ├── .env.example
 ├── .gitignore
 └── README.md
@@ -100,61 +103,37 @@ El acceso a `/admin` está protegido con `ProtectedRoute` y solo se permite a us
 
 ## 🧩 Arquitectura
 
-El proyecto está organizado en capas:
+La interfaz sigue la organización de `paseoappfront` con `componentes/`, `paginas/`, `assets/`, `main.jsx`, `App.jsx` y `estilos.css`. Las capas adicionales conservan responsabilidades separadas:
 
 - `core`: configuración, constantes y enums
 - `domain`: entidades e interfaces del negocio
 - `application`: servicios y DTOs
 - `infrastructure`: llamadas a API, repositorios y persistencia
 - `presentation`: contextos y hooks React
-- `components`: elementos reutilizables de UI
+- `componentes`: elementos reutilizables de UI
 
 ## 🌐 API consumida
 
-La app usa estos endpoints:
+La app consume los endpoints REST de usuarios, instalaciones y reservaciones bajo `/api/v1`.
 
-```text
-GET    /api/v1/users
-GET    /api/v1/users?email=<email>
-POST   /api/v1/users
-DELETE /api/v1/users/:id
-GET    /api/v1/facilities
-DELETE /api/v1/facilities/:id
-GET    /api/v1/reservations
-```
+## 💼 Archivos clave
 
-## 💼 Componentes clave
-
-- `src/presentation/context/auth.context.js`
-- `src/presentation/hooks/useAuth.js`
-- `src/components/ProtectedRoute.js`
-- `src/infrastructure/service-locator.js`
-- `src/application/services/auth.service.js`
+- `src/main.jsx`: punto de entrada React
+- `src/App.jsx`: rutas de la aplicación
+- `src/paginas/`: vistas de inicio, login, registro y administración
+- `src/componentes/`: componentes reutilizables y modales
+- `src/infrastructure/service-locator.js`: composición de servicios
 
 ## 🛠️ Cómo desarrollar
 
 ### Agregar una nueva página
-1. Crear archivo en `src/pages/`
-2. Importarlo en `src/App.js`
-3. Añadir la ruta en el `Routes`
-
-### Usar autenticación
-
-```javascript
-import { useAuth } from './presentation/hooks/useAuth';
-
-function MiComponente() {
-  const { user, login, logout, isAdmin } = useAuth();
-}
-```
+1. Crear el archivo en `src/paginas/`
+2. Importarlo en `src/App.jsx`
+3. Añadir la ruta dentro de `Routes`
 
 ### Configurar API
 
-Si necesitas cambiar el backend, usa `.env` con:
-
-```env
-REACT_APP_API_URL=http://localhost:8080/api/v1
-```
+Define `VITE_API_URL` en `.env`; por defecto se usa `http://localhost:8080/api/v1`.
 
 ## 📦 Dependencias principales
 
@@ -165,7 +144,7 @@ REACT_APP_API_URL=http://localhost:8080/api/v1
 
 ## 🚨 Troubleshooting
 
-### Error al iniciar `npm start`
+### Error al iniciar `npm run dev`
 - Ejecuta `npm install` primero
 - Confirma que Node.js está instalado
 
@@ -178,10 +157,10 @@ taskkill /PID <PID> /F
 
 ### Conexión rechazada al backend
 - Asegúrate de que el backend esté corriendo en `http://localhost:8080`
-- Verifica que el `REACT_APP_API_URL` sea correcto
+- Verifica que el `VITE_API_URL` sea correcto
 
 ### CORS
-- Configura el backend para aceptar requests desde `http://localhost:3000`
+- Configura el backend para aceptar requests desde `http://localhost:5173`
 
 ## 📚 Documentación unificada
 

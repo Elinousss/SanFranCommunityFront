@@ -229,3 +229,344 @@
     gap: 16px;
   }
 }
+
+.auth-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(450px, 0.88fr);
+  min-height: 100vh;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  background: #fbfcf9;
+  font-family: 'Inter', sans-serif;
+}
+
+.auth-scene {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 42px 54px;
+  background-color: #214f42;
+  background-image:
+    linear-gradient(180deg, rgba(14, 43, 35, 0.45), rgba(11, 34, 29, 0.14) 42%, rgba(9, 31, 26, 0.78)),
+    url('https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1800&q=85');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+.auth-scene-kicker,
+.auth-scene-note {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.auth-scene > div {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: auto 0;
+  padding: 48px 0;
+}
+
+.auth-scene > div p {
+  margin: 0 0 18px;
+  color: #efffcf;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 1px 2px rgba(0, 0, 0, 0.9);
+  text-transform: uppercase;
+}
+
+.auth-scene h2 {
+  max-width: 600px;
+  margin: 0;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 58px;
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+.auth-card,
+.auth-card-large {
+  width: min(100% - 72px, 520px);
+  max-width: 520px;
+  align-self: center;
+  justify-self: center;
+  margin: 36px;
+  padding: 12px 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  animation: auth-arrive 420ms ease-out both;
+}
+
+.auth-header {
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.auth-header i {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  margin: 0 0 20px;
+  border-radius: 14px;
+  background: #e8f0e2;
+  color: var(--primary);
+  font-size: 20px;
+}
+
+.auth-header h1 {
+  margin: 0 0 8px;
+  color: #1d382f;
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+.auth-header p {
+  color: #718077;
+  font-size: 15px;
+}
+
+.auth-nav {
+  margin: -8px 0 22px;
+}
+
+.auth-nav .link,
+.auth-footer .link,
+.auth-reset-link .link {
+  color: #376a54;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.auth-nav .link:hover,
+.auth-footer .link:hover,
+.auth-reset-link .link:hover {
+  color: #1c4939;
+}
+
+.auth-form {
+  gap: 17px;
+  margin-bottom: 24px;
+}
+
+.auth-container .form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.auth-container .form-group {
+  min-width: 0;
+  gap: 7px;
+}
+
+.auth-container .form-group label {
+  color: #344a40;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.input-wrapper {
+  min-height: 50px;
+  gap: 11px;
+  padding: 0 14px;
+  border: 1px solid #dfe7dd;
+  border-radius: 6px;
+  background: #f7f9f5;
+}
+
+.input-wrapper:focus-within {
+  border-color: #6b9b7c;
+  box-shadow: 0 0 0 3px rgba(85, 133, 100, 0.12);
+}
+
+.input-wrapper i {
+  color: #809187;
+  font-size: 14px;
+}
+
+.input-wrapper input {
+  min-width: 0;
+  color: #20342d;
+  font-size: 14px;
+}
+
+.input-wrapper input::placeholder {
+  color: #99a59d;
+}
+
+.auth-container .btn {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.auth-container .btn-primary {
+  width: 100%;
+  background: #245c4b;
+  color: #fff;
+}
+
+.auth-container .btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #173f35;
+  box-shadow: 0 8px 18px rgba(29, 76, 59, 0.16);
+}
+
+.auth-reset-link {
+  margin-top: -6px;
+  text-align: right;
+}
+
+.auth-footer {
+  padding-top: 21px;
+  border-top: 1px solid #e7ece5;
+  text-align: left;
+}
+
+.auth-footer p {
+  margin-bottom: 5px;
+  color: #718077;
+}
+
+.auth-container .alert {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+  padding: 13px 15px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.auth-container .alert-error {
+  border-color: #f0d4cf;
+  background: #fff5f2;
+  color: #9c3d32;
+}
+
+.auth-container .alert-success {
+  border-color: #cfe2d0;
+  background: #f1f8ef;
+  color: #315e3d;
+}
+
+.demo-info {
+  margin-top: 22px;
+  border-left: 3px solid #8eaa78;
+  border-radius: 4px;
+  background: #f2f6ef;
+  color: #6a7b72;
+}
+
+@keyframes auth-arrive {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .auth-container {
+    grid-template-columns: minmax(0, 0.9fr) minmax(400px, 1.1fr);
+  }
+
+  .auth-scene {
+    padding: 32px;
+  }
+
+  .auth-scene h2 {
+    font-size: 44px;
+  }
+
+  .auth-card,
+  .auth-card-large {
+    width: calc(100% - 48px);
+    margin: 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .auth-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .auth-scene {
+    min-height: 270px;
+    padding: 22px 24px;
+  }
+
+  .auth-scene > div {
+    padding: 25px 0 12px;
+  }
+
+  .auth-scene > div p {
+    margin-bottom: 10px;
+  }
+
+  .auth-scene h2 {
+    max-width: 380px;
+    font-size: 38px;
+  }
+
+  .auth-scene-note {
+    display: none;
+  }
+
+  .auth-card,
+  .auth-card-large {
+    width: min(100% - 40px, 520px);
+    max-width: 520px;
+    margin: 30px auto 42px;
+    padding: 0;
+  }
+
+  .auth-header {
+    margin-bottom: 24px;
+  }
+
+  .auth-header h1 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 420px) {
+  .auth-container .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-scene {
+    min-height: 250px;
+  }
+
+  .auth-scene h2 {
+    font-size: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-card,
+  .auth-card-large {
+    animation: none;
+  }
+}
